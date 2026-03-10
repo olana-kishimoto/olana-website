@@ -1,0 +1,22 @@
+# 依存関係
+node_modules/
+.npm
+
+# ビルド成果物
+.next/
+out/
+
+# 環境変数（絶対にコミットしない）
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+# ログ
+*.log
+npm-debug.log*
+
+# pm2
+.pm2/

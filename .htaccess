@@ -1,0 +1,19 @@
+# XServer リバースプロキシ設定
+# Next.js（ポート3000）へ全リクエストを転送
+
+Options -MultiViews
+RewriteEngine On
+
+# HTTPSリダイレクト（本番のみ有効化）
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# Node.jsへプロキシ
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ http://localhost:3000/$1 [P,L]
+
+# ヘッダー設定（セキュリティ）
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
